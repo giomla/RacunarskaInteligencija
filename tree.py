@@ -119,21 +119,20 @@ def make_canonical(tree):
 
 def is_subtree(subtree, tree):
 	if subtree.children == [] and tree.children == []:
-		return True,1
+		return True
     
 	if subtree.children == []:
-		return True,1
+		return True
 
 	if subtree.num_of_nodes > tree.num_of_nodes:
-		return False,0
+		return False
     
 	if subtree.num_of_nodes == tree.num_of_nodes:
 		return is_isomorphic(subtree, tree)
 
 	if len(subtree.children) > len(tree.children):
 		for child in tree.children:
-			is_tree,_ = is_subtree(subtree, child)
-			if is_tree:
+			if not is_subtree(subtree, child):
 				return True
 		return False
     
@@ -149,7 +148,7 @@ def is_subtree(subtree, tree):
 	num_right_vertices = len(tree.children) 
 	max_matching_size,_ = max_bipartite_matching(adjacency_lists, num_left_vertices,num_right_vertices)
 
-	return max_matching_size == num_left_vertices, max_matching_size
+	return max_matching_size == num_left_vertices
 
 def max_bipartite_matching(adjacency_lists, num_left_vertices,num_right_vertices):
     pair_U = [-1] * num_left_vertices
