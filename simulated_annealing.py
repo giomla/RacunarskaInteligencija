@@ -33,18 +33,6 @@ def generate_random_subtree1(tree, curr_level, max_level):
         else:
             generate_random_subtree1(child, curr_level+1, max_level)
 
-def generate_random_subtree1(tree, curr_level, max_level):
-
-    if tree.children==[] or curr_level==max_level:
-        return 
-
-    for child in tree.children:
-
-        if random.random() < 0.3 :
-            tree.remove_child(child)
-        else:
-            generate_random_subtree1(child, curr_level+1, max_level)
-
 
 def initialize1(collection):
     max_height_tree = min(collection,key= lambda node : node.height)

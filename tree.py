@@ -132,7 +132,7 @@ def is_subtree(subtree, tree):
 
 	if len(subtree.children) > len(tree.children):
 		for child in tree.children:
-			if not is_subtree(subtree, child):
+			if is_subtree(subtree, child):
 				return True
 		return False
     
@@ -140,13 +140,13 @@ def is_subtree(subtree, tree):
 	for ch1 in subtree.children:
 		adjacency_list = []
 		for idx, ch2 in enumerate(tree.children):
-			if is_subtree(ch1, ch2)==ch1.num_of_nodes:
+			if is_subtree(ch1, ch2):
 				adjacency_list.append(idx)
 		adjacency_lists.append(adjacency_list)
     
 	num_left_vertices = len(subtree.children)
 	num_right_vertices = len(tree.children) 
-	max_matching_size,_ = max_bipartite_matching(adjacency_lists, num_left_vertices,num_right_vertices)
+	max_matching_size = max_bipartite_matching(adjacency_lists, num_left_vertices,num_right_vertices)
 
 	return max_matching_size == num_left_vertices
 
